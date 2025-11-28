@@ -52,14 +52,6 @@ exclude = ["*.ipynb"]
 distribution = true
 
 [tool.pdm.scripts]
-pre_dev.cmd = "bash scripts/prestart.sh"
-pre_dev.env_file = '../.env'
-dev.cmd = "fastapi dev src/marcel/main.py"
-dev.env_file = "../.env"
-pre_prod.cmd = "bash scripts/prestart.sh"
-pre_prod.env_file = '../.env'
-prod.cmd = "uvicorn marcel.main:app --host 0.0.0.0 --port 9000"
-prod.env_file = "../.env"
 format-code = "ruff format"
 format-imports = "ruff check --select I --fix"
 format = {composite = ["format-imports", "format-code"]}
