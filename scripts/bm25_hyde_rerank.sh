@@ -12,8 +12,7 @@ VLLM_MAX_MODEL_LEN=8192
 
 source experiments/vllm_serve.sh
 
-pdm run -p backend/ \
-    python backend/src/marcel/experiments/retrievers.py \
+pdm run python src/marcel/retrievers.py \
     --data_path data/crawls/20250317/data.jsonl \
     --query_path data/queries/20250317-email.json \
     --out_path output/20250317-email/$RUN_ID/ \

@@ -7,8 +7,7 @@
 
 RUN_ID=bm25_dense_rerank
 
-pdm run -p backend/ \
-    python backend/src/marcel/experiments/retrievers.py \
+pdm run python src/marcel/retrievers.py \
     --data_path data/crawls/20250317/data.jsonl \
     --query_path data/queries/20250317-email.json \
     --out_path output/20250317-email/$RUN_ID/ \
