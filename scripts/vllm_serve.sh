@@ -2,7 +2,7 @@
 module purge
 module load miniconda
 source $CONDA_ROOT/bin/activate
-conda activate vllm
+conda activate vllm-0.11.0
 
 cleanup() {
     echo "Stopping vllm..."
@@ -37,4 +37,6 @@ done
 
 export LLM_BASE_URL="http://localhost:$VLLM_PORT/v1"
 export LLM_API_KEY=$VLLM_API_KEY
+export OPENAI_BASE_URL="http://localhost:$VLLM_PORT/v1"
+export OPENAI_API_KEY=$VLLM_API_KEY
 echo "vLLM is healthy."
