@@ -1,6 +1,6 @@
 from haystack import Document
 
-from marcel.experiments.components import (
+from marcel.components import (
     ContentLinkNormalizer,
     clean_unlinked_references,
 )

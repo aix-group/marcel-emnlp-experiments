@@ -1,6 +1,6 @@
 from haystack import Document
 
-from marcel.experiments.faq_retriever import (
+from marcel.faq_retriever import (
     DocumentDeduplicator,
     FAQRetriever,
     ParentDocumentRetriever,

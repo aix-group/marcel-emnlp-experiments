@@ -2,7 +2,7 @@ import json
 import textwrap
 from pathlib import Path
 
-from marcel.experiments.data_loader import (
+from marcel.data_loader import (
     clean_bolded_headers,
     clean_bulleted_headers,
     clean_collapsibles,

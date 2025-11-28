@@ -2,7 +2,7 @@ import pytest
 from haystack import Document
 from haystack.document_stores.in_memory import InMemoryDocumentStore
 
-from marcel.experiments.oracle_retriever import BM25RetrieverWithOracle
+from marcel.oracle_retriever import BM25RetrieverWithOracle
 
 documents = [
     Document(id="a", content="apple"),
