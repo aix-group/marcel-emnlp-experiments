@@ -43,9 +43,8 @@ asyncio_default_fixture_loop_scope = "function"
 # https://github.com/nedbat/coveragepy/issues/1082#issuecomment-979462293
 concurrency = ["thread", "greenlet"]
 
-[tool.ruff.format]
-exclude = ["*.ipynb"]
-
+[tool.ruff]
+extend-exclude = ["*.ipynb"]
 
 [tool.pdm]
 # This is set to true so that package becomes importable
