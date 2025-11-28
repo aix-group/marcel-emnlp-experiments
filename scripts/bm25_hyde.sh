@@ -10,7 +10,7 @@ VLLM_MODEL=google/gemma-3-1b-it
 VLLM_TENSOR_PARALLEL_SIZE=1
 VLLM_MAX_MODEL_LEN=8192
 
-source experiments/vllm_serve.sh
+source scripts/vllm_serve.sh
 
 pdm run python src/marcel/retrievers.py \
     --data_path data/crawls/20250317/data.jsonl \

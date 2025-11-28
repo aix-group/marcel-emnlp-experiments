@@ -8,7 +8,7 @@
 RUN_ID=generation_llama-3.1-70b
 VLLM_MODEL=meta-llama/Llama-3.1-70B-Instruct
 
-source experiments/vllm_serve.sh
+source scripts/vllm_serve.sh
 
 pdm run python src/marcel/retrievers.py \
     --data_path data/crawls/20250317/data.jsonl \

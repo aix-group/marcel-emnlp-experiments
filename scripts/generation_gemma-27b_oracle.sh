@@ -5,10 +5,10 @@
 #SBATCH --partition=owner_fb12
 #SBATCH --mem-per-cpu=4G
 
-RUN_ID=generation_gemma-3-27b-it_oracle
+RUN_ID=generation_gemma-3-27b-it_oracle_rerun
 VLLM_MODEL=google/gemma-3-27b-it
 
-source experiments/vllm_serve.sh
+source scripts/vllm_serve.sh
 
 pdm run python src/marcel/retrievers.py \
     --data_path data/crawls/20250317/data.jsonl \
