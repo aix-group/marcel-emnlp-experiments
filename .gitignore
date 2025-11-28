@@ -1,3 +1,4 @@
+evaluate_tasks.txt
 *.out
 output
 wandb
