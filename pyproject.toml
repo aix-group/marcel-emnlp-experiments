@@ -11,15 +11,18 @@ dependencies = [
     "transformers[sentencepiece,torch]==4.52.2",
     "nltk==3.9.1",
     "w3lib==2.3.1",
-    "marcel-evaluation @ git+ssh://git@github.com/aix-group/marcel-evaluation.git@main"
+    "marcel-evaluation @ git+ssh://git@github.com/aix-group/marcel-evaluation.git@main",
+    "torch==2.6.0"
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
 license = {text = "MIT"}
 
+# Change this if you need another torch build (e.g., for cpu or higher cuda)
+# Afterwards run "pdm add torch==2.6.0" to update lock file
 [[tool.pdm.source]]
 name = "torch"
-url = "https://download.pytorch.org/whl/cpu"
+url = "https://download.pytorch.org/whl/cu124"
 include_packages = ["torch"]
 exclude_packages = ["*"]
 
