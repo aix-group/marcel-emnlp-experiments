@@ -10,8 +10,7 @@ VLLM_MODEL=neuralmagic/Meta-Llama-3.1-70B-Instruct-quantized.w8a8
 
 source experiments/vllm_serve.sh
 
-pdm run -p backend/ \
-    python backend/src/marcel/experiments/retrievers.py \
+pdm run python src/marcel/retrievers.py \
     --data_path data/crawls/20250317/data.jsonl \
     --query_path data/queries/20250317-email.json \
     --faq_path data/queries/20250317-faq.json \
