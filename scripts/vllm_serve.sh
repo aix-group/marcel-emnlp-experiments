@@ -50,8 +50,6 @@ until curl -s -o /dev/null -w "%{http_code}" "http://localhost:$VLLM_PORT/health
     sleep 10
 done
 
-export LLM_BASE_URL="http://localhost:$VLLM_PORT/v1"
-export LLM_API_KEY=$VLLM_API_KEY
 export OPENAI_BASE_URL="http://localhost:$VLLM_PORT/v1"
 export OPENAI_API_KEY=$VLLM_API_KEY
 echo "vLLM is healthy."

@@ -54,8 +54,8 @@ class HyDE:
             "generator",
             OpenAIChatGenerator(
                 model=generator_model,
-                api_base_url=os.environ["LLM_BASE_URL"],
-                api_key=Secret.from_token(os.environ["LLM_API_KEY"]),
+                api_base_url=os.environ["OPENAI_BASE_URL"],
+                api_key=Secret.from_token(os.environ["OPENAI_API_KEY"]),
                 generation_kwargs={
                     "n": n,
                     "temperature": temperature,

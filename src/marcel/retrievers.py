@@ -163,8 +163,8 @@ def get_pipeline(documents: List[Document], faqs: List[Document], config):
         )
         llm = OpenAIChatGenerator(
             model=config.generation_model,
-            api_base_url=os.environ["LLM_BASE_URL"],
-            api_key=Secret.from_env_var("LLM_API_KEY"),
+            api_base_url=os.environ["OPENAI_BASE_URL"],
+            api_key=Secret.from_env_var("OPENAI_API_KEY"),
             generation_kwargs={
                 "temperature": config.generation_temperature,
                 "n": 1,
