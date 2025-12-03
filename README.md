@@ -1,10 +1,36 @@
-# Experiments
+# Marcel Experiments (EMNLP 2025, System Demonstration)
 
-Every script is to be run from the repository root.
+This repository provides the code and resources to reproduce the experiments of following paper:
 
-## Retrievers
+> Jan Trienes, Anastasiia Derzhanskaia, Roland Schwarzkopf, Markus Mühling, Jörg Schlötterer, and Christin Seifert. 2025. [Marcel: A Lightweight and Open-Source Conversational Agent for University Student Support](https://aclanthology.org/2025.emnlp-demos.13/). In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, pages 181–195, Suzhou, China. Association for Computational Linguistics.
+
+For the demo application itself, please refer to the [Marcel-Chat](https://github.com/aix-group/marcel-chat) repository.
+
+
+## Environment
+
+Clone this repository:
 
 ```sh
+git clone https://github.com/aix-group/marcel-emnlp-experiments.git
+```
+
+Install dependencies with with [pdm](https://pdm-project.org/en/latest/).
+
+```sh
+pdm install
+```
+
+## Compute Requirements
+
+Every script is to be run from the repository root. We use a Slurm-based execution environment, but each script below can also be executed on a standard Linux host. Minimum requirement: 2 GPUs (e.g., A100 with 80GB VRAM) and sufficient disk space for storing model checkpoints (~ 400 GB). Each script should take less than one hour to complete on our dataset.
+
+## Retriever Experiments
+
+Reproducing the main retriever results (Table 2).
+
+```sh
+# Retrievers without reranking.
 sbatch scripts/bm25.sh
 sbatch scripts/bm25_dense_minilm_gpu.sh
 sbatch scripts/bm25_dense_minilm.sh
@@ -16,8 +42,15 @@ sbatch scripts/bm25_faq_msmarco_gpu.sh
 sbatch scripts/bm25_faq_msmarco.sh
 sbatch scripts/bm25_hyde.sh
 
+# Retrieves with best reranking model
+sbatch scripts/bm25_dense_rerank.sh
+sbatch scripts/bm25_hyde_rerank.sh
+sbatch scripts/bm25_faq_rerank.sh
+```
 
-# BM25 + Dense + Rerank (Model sweep)
+Reproducing the reranker model sweep (Appendix, Table 4).
+
+```
 sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_jina-tiny jinaai/jina-reranker-v1-tiny-en
 sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_jina-turbo jinaai/jina-reranker-v1-turbo-en
 sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_mxbai-xsmall mixedbread-ai/mxbai-rerank-xsmall-v1
@@ -25,18 +58,20 @@ sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_mxbai-base mixedbrea
 sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_mxbai-large mixedbread-ai/mxbai-rerank-large-v1
 sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_minilm-l6 cross-encoder/ms-marco-MiniLM-L6-v2
 sbatch scripts/bm25_dense_rerank_sweep.sh bm25_dense_rerank_minilm-12 cross-encoder/ms-marco-MiniLM-L12-v2
-
-# Run with best model
-sbatch scripts/bm25_dense_rerank.sh
-sbatch scripts/bm25_hyde_rerank.sh
-sbatch scripts/bm25_faq_rerank.sh
-
-# Evaluation
-./scripts/evaluate_task_list.sh
-sbatch --array=0-1%20 scripts/evaluate.sh --metrics ReferenceAnswerLength,ContextLength,MeanReciprocalRank,PrecisionAtCutoff,RecallAtCutoff
 ```
 
-## Generator experiments
+Evaluate system outputs.
+
+```sh
+# Run the command below and follow printed instruction
+./scripts/evaluate_task_list.sh
+```
+
+Generate LaTeX tables: run [notebooks/retriever-evaluation.ipynb](./notebooks/retriever-evaluation.ipynb).
+
+## Generator Experiments
+
+Reproduce generator experiments (Table 3).
 
 ```sh
 VLLM_PORT=8000 sbatch scripts/generation_llama-3.1-8b.sh
@@ -48,7 +83,46 @@ VLLM_PORT=8050 sbatch scripts/generation_gemma-4b.sh
 VLLM_PORT=8060 sbatch scripts/generation_gemma-12b.sh
 VLLM_PORT=8070 sbatch scripts/generation_gemma-27b.sh
 VLLM_PORT=8080 sbatch scripts/generation_gemma-27b_oracle.sh
-
-# Evaluation: run the command below and follow printed instruction
-./scripts/evaluate_task_list.sh # TODO evaluate this: 8585778
 ```
+
+Evaluate system outputs.
+
+
+```sh
+# Run the command below and follow printed instruction
+./scripts/evaluate_task_list.sh
+```
+
+Generate LaTeX tables: run [notebooks/generator-evaluation.ipynb](./notebooks/generator-evaluation.ipynb).
+
+## Citation
+
+If you found any of these resources useful, please consider citing the following paper.
+
+```bibtex
+@inproceedings{trienes-etal-2025-marcel,
+    title = "Marcel: A Lightweight and Open-Source Conversational Agent for University Student Support",
+    author = {Trienes, Jan  and
+      Derzhanskaia, Anastasiia  and
+      Schwarzkopf, Roland  and
+      M{\"u}hling, Markus  and
+      Schl{\"o}tterer, J{\"o}rg  and
+      Seifert, Christin},
+    editor = {Habernal, Ivan  and
+      Schulam, Peter  and
+      Tiedemann, J{\"o}rg},
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-demos.13/",
+    doi = "10.18653/v1/2025.emnlp-demos.13",
+    pages = "181--195",
+    ISBN = "979-8-89176-334-0",
+}
+```
+
+## Contact
+
+Please reach out to <a href="mailto:jan.trienes@uni-marburg.de">Jan Trienes</a> if you have any comments, questions, or suggestions.
