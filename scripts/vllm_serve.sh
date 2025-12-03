@@ -1,8 +1,23 @@
 #!/bin/bash
 module purge
 module load miniconda
-source $CONDA_ROOT/bin/activate
-conda activate vllm-0.11.0
+eval "$(conda shell.bash activate)"
+
+vllm_version=0.11.0
+vllm_conda_env="vllm-$vllm_version"
+
+setup_environment() {
+    if conda env list | grep -q "^$vllm_conda_env"; then
+        echo "Using conda environment $vllm_conda_env"
+    else
+        echo "Creating environment $vllm_conda_env..."
+        conda create -n "$vllm_conda_env" python=3.13 pip -y
+        conda run -n "$vllm_conda_env" pip install "vllm==$vllm_version"
+    fi
+}
+
+setup_environment
+conda activate $vllm_conda_env
 
 cleanup() {
     echo "Stopping vllm..."
