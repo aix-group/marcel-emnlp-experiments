@@ -4,8 +4,7 @@ This repository provides the code to reproduce the experiments of following pape
 
 > Jan Trienes, Anastasiia Derzhanskaia, Roland Schwarzkopf, Markus Mühling, Jörg Schlötterer, and Christin Seifert. 2025. [Marcel: A Lightweight and Open-Source Conversational Agent for University Student Support](https://aclanthology.org/2025.emnlp-demos.13/). In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, pages 181–195, Suzhou, China. Association for Computational Linguistics.
 
-For the demo application itself, please refer to the [Marcel-Chat](https://github.com/aix-group/marcel-chat) repository.
-
+For the demo application itself, please refer to the [`marcel-chat`](https://github.com/aix-group/marcel-chat) repository.
 
 ## Environment
 
@@ -20,6 +19,8 @@ Install dependencies with with [pdm](https://pdm-project.org/en/latest/).
 ```sh
 pdm install
 ```
+
+The code makes use of our RAG evaluation framework [`marcel-evaluation`](https://github.com/aix-group/marcel-evaluation) which is installed alongside the other dependencies.
 
 ## Data
 
