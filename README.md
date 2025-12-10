@@ -1,6 +1,6 @@
 # Marcel Experiments (EMNLP 2025, System Demonstration)
 
-This repository provides the code and resources to reproduce the experiments of following paper:
+This repository provides the code to reproduce the experiments of following paper:
 
 > Jan Trienes, Anastasiia Derzhanskaia, Roland Schwarzkopf, Markus Mühling, Jörg Schlötterer, and Christin Seifert. 2025. [Marcel: A Lightweight and Open-Source Conversational Agent for University Student Support](https://aclanthology.org/2025.emnlp-demos.13/). In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, pages 181–195, Suzhou, China. Association for Computational Linguistics.
 
@@ -21,9 +21,24 @@ Install dependencies with with [pdm](https://pdm-project.org/en/latest/).
 pdm install
 ```
 
+## Data
+
+We provide knowledge base, data for FAQ retriever and sample queries in `data/`. The full evaluation data (user queries + model outputs) are shared on request. This is the checksums of data:
+
+```sh
+❯ md5sum data/**/*.json*
+b92b502be1fe4bb75c82a00b4d1a431b  data/crawls/20250317/data.jsonl           # Knowledge base: scraped HTML converted to Markdown
+3f5fd08d8ebb4cf47a4bab341437399f  data/queries/20250317-email.example.json  # Sample queries
+cdb09ad24885f75b5e16acd5d8c47dcf  data/queries/20250317-email.json          # User queries for evaluation
+7cb12ec7de0975417cf0cac453d50045  data/queries/20250317-faq.json            # Curated data for FAQ retriever
+```
+
+Please reach out using contact detail below if you would like to have access to the data.
+
+
 ## Compute Requirements
 
-Every script is to be run from the repository root. We use a Slurm-based execution environment, but each script below can also be executed on a standard Linux host. Minimum requirement: 2 GPUs (e.g., A100 with 80GB VRAM) and sufficient disk space for storing model checkpoints (~ 400 GB). Each script should take less than one hour to complete on our dataset.
+Every script is to be run from the repository root. We use a Slurm-based execution environment, but each script below can also be executed on a standard Linux host. Minimum requirement: 2 GPUs (e.g., A100 with 80GB VRAM) and sufficient disk space for storing model checkpoints (~ 400 GB).
 
 ## Retriever Experiments
 

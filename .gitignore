@@ -1,6 +1,7 @@
 evaluate_tasks.txt
 *.out
 output
+data
 wandb
 
 # Byte-compiled / optimized / DLL files

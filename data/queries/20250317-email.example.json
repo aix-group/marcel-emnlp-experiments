@@ -1,0 +1,12 @@
+[
+    {
+        "id": "faq-0036",
+        "category": "01 - Admission Criteria",
+        "intent": "What GPA scale is used?",
+        "question": "what GPA scale does your institution use?",
+        "reference_answer": "The university of Marburg uses grade points and grades. Grade points range from 15 (very good) to 0 (fail). The best grade is a 0.7 (better than a 1.0) - very good, and the worst grade is 5.0 (fail).",
+        "sources": [
+            "https://www.uni-marburg.de/en/fb12/studying/modules-and-courses/glossary"
+        ]
+    }
+]
