@@ -92,9 +92,7 @@ class FAQRetriever:
         faq_indexing.add_component(
             "embedder",
             SentenceTransformersDocumentEmbedder(
-                model=embedding_model,
-                progress_bar=False,
-                local_files_only=True,
+                model=embedding_model, progress_bar=False
             ),
         )
         faq_indexing.add_component("writer", DocumentWriter(document_store=faq_store))
@@ -104,11 +102,7 @@ class FAQRetriever:
         pipeline = Pipeline()
         pipeline.add_component(
             "query_embedder",
-            SentenceTransformersTextEmbedder(
-                model=embedding_model,
-                progress_bar=False,
-                local_files_only=True,
-            ),
+            SentenceTransformersTextEmbedder(model=embedding_model, progress_bar=False),
         )
         pipeline.add_component(
             "faq_retriever",
