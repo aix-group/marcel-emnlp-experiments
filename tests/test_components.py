@@ -2,8 +2,47 @@ from haystack import Document
 
 from marcel.components import (
     ContentLinkNormalizer,
+    MostRelevantFirstReranker,
+    MostRelevantLastReranker,
+    RandomReranker,
     clean_unlinked_references,
 )
+
+
+def test_most_relevant_first_reranker():
+    docs = [
+        Document(score=2),
+        Document(score=1),
+        Document(score=3),
+    ]
+    reranker = MostRelevantFirstReranker()
+    result = reranker.run(documents=docs)["documents"]
+    scores = [doc.score for doc in result]
+    assert scores == [3, 2, 1]
+
+
+def test_most_relevant_last_reranker():
+    docs = [
+        Document(score=2),
+        Document(score=1),
+        Document(score=3),
+    ]
+    reranker = MostRelevantLastReranker()
+    result = reranker.run(documents=docs)["documents"]
+    scores = [doc.score for doc in result]
+    assert scores == [1, 2, 3]
+
+
+def test_random_reranker():
+    docs = [
+        Document(score=2),
+        Document(score=1),
+        Document(score=3),
+    ]
+    reranker = RandomReranker()
+    result = reranker.run(documents=docs)["documents"]
+    scores = [doc.score for doc in result]
+    assert set(scores) == set([1, 2, 3])
 
 
 def test_content_link_normalizer():

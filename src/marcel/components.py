@@ -7,6 +7,31 @@ from haystack.components.generators.chat import OpenAIChatGenerator
 from haystack.dataclasses import ChatMessage
 
 
+@component
+class MostRelevantFirstReranker:
+    @component.output_types(documents=List[Document])
+    def run(self, documents: List[Document]) -> Dict[str, List[Document]]:
+        documents = list(sorted(documents, key=lambda doc: doc.score, reverse=True))
+        return {"documents": documents}
+
+
+@component
+class MostRelevantLastReranker:
+    @component.output_types(documents=List[Document])
+    def run(self, documents: List[Document]) -> Dict[str, List[Document]]:
+        documents = list(sorted(documents, key=lambda doc: doc.score, reverse=False))
+        return {"documents": documents}
+
+
+@component
+class RandomReranker:
+    @component.output_types(documents=List[Document])
+    def run(self, documents: List[Document]) -> Dict[str, List[Document]]:
+        documents = list(documents)
+        random.shuffle(documents)
+        return {"documents": documents}
+
+
 def clean_unlinked_references(content: str, matched: str):
     """
     This function removes invalid or unreferenced link references from the content of a document.
