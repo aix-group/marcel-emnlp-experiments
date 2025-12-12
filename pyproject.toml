@@ -46,7 +46,6 @@ format = {composite = ["format-imports", "format-code"]}
 lint = "ruff check"
 lint-fix = "ruff check --fix"
 test.cmd = "pytest --cov-report html --cov=marcel --cov-branch"
-test.env_file = '../.env.test'
 
 [dependency-groups]
 dev = [
