@@ -23,9 +23,6 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: ./backend
 
     steps:
       - uses: actions/checkout@v6
@@ -51,9 +48,6 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: ./backend
 
     steps:
       - uses: actions/checkout@v6
